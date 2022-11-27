@@ -1,0 +1,48 @@
+{% macro projects(title, description, image, repo_url) %}
+<div class="card">
+    <div class="card__header">
+        <div class="card__title">
+            <h2>
+                {{ title }}
+            </h2>
+        </div>
+    </div>
+    <div class="card__content">
+        <img class="card__image" src="{{image}}" />
+        <div class="card__background"></div>
+    </div>
+    <div class="card__description">
+        <p>{{ description }}</p>
+    </div>
+    <div class="card__footer">
+        <a href="{{repo_url}}" target="_blank"><i class="fa-brands fa-github"></i></a>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro experience(title, company, description, started, ended, company_website, logo, stack) %}
+<div class="card card--experience">
+    <div class="card__logo">
+        <img src="{{logo}}" />
+    </div>
+    <div class="card__content">
+        <div class="card_header card__header--no-background">
+            <div class="card__title">
+                <h2>
+                    <span class="strong">{{ title }}</span> at <a class="link" target="_blank" href="{{company_url}}"><span class="strong">{{ company }}</span></a>
+                </h2>
+                <p>{{started}} | {{ended}}</p>
+            </div>
+        </div>
+        <div class="card__description card__description--no-background">
+            <p>{{ description }}</p>
+            <h3 class="strong">Stack:</h3>
+            <ul>
+                {% for item in stack %}
+                    <li>{{item}}</li>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endmacro %}

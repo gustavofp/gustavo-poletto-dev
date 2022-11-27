@@ -1,17 +1,217 @@
+{% import "../_macros/cards.njk" as cards %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ title }}</title>
-	<link rel="stylesheet" href="{{ '/css/style.css' | url }}" />
+	<link rel="stylesheet" href="{{ '/css/main.css' | url }}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+
+	const menuElements = {
+		info: document.getElementById("info"),
+		skills: document.getElementById("skills"),
+		projects: document.getElementById("projects"),
+		experience: document.getElementById("experience")
+	}
+
+	const contentElements = {
+		info: document.getElementsByClassName('content__info')[0],
+		skills: document.getElementsByClassName('content__skills')[0],
+		projects: document.getElementsByClassName('content__projects')[0],
+		experience: document.getElementsByClassName('content__experience')[0]
+	}
+
+	const hideExcept = (exception) => {
+		Object.keys(contentElements).forEach((key, index) => {
+			console.log(key, exception)
+			console.log(contentElements[key])
+			if (key === exception) {
+				contentElements[key].classList.remove('hide')
+			} else {
+				contentElements[key].classList.add('hide')
+			}
+		})
+	}
+
+	const setSelected = (selected) => {
+		Object.keys(menuElements).forEach((key, index) => {
+			if (key === selected) {
+				menuElements[key].classList.add('menu__item--selected')
+			} else {
+				menuElements[key].classList.remove('menu__item--selected')
+			}
+		})
+	} 
+
+	const showSkills = () => {
+		hideExcept('skills')
+		setSelected('skills')
+	}
+
+	const showInfo = () => {
+		hideExcept('info')
+		setSelected('info')
+	}
+
+	const showProjects = () => {
+		hideExcept('projects')
+		setSelected('projects')
+	}
+
+	const showExperience = () => {
+		hideExcept('experience')
+		setSelected('experience')
+	}
+
+	menuElements.skills.addEventListener('click', () => {
+		showSkills()
+	})
+
+	menuElements.info.addEventListener('click', () => {
+		showInfo()
+	})
+
+	menuElements.projects.addEventListener('click', () => {
+		showProjects()
+	})
+
+	menuElements.experience.addEventListener('click', () => {
+		showExperience()
+	})
+});
+</script>
+
+{% set projects = [
+	{ 
+		title: "Rock Paper Scissors", 
+		description: "This project was a challenge for FrontendMentor, wich I've decided to do to put on practice some Css concepts that I havent been using usually. Like creating a frontend from scratch, without libraries or reusing classes.", 
+		image: './img/rock-paper-scissors.png',
+		repo_url: 'https://github.com/gustavofp/rock-paper-scissors-challenge'
+	},
+	{ 
+		title: "Game Rooms", 
+		description: "I did this project to learn Elixir, It's a 'Game Rooms' provider, it has a frontend and a backend and has some features like, creating a rooms, joining and then starting the game, It was made with Elixir and React", 
+		image: './img/game-rooms.png',
+		repo_url: 'https://github.com/gustavofp/game-rooms-backend'
+	}
+] 
+%}
+{% set experiences = [
+	{ 
+		title: "Fullstack Developer", 
+		company: "Globo",
+		description: "It's great to work with a product that I've been an user for a long time, I'm so happy to have this chance at this amazing company.", 
+		company_url: 'www.globo.com',
+		started: 'Mar/2022',
+		ended: 'Present',
+		logo: './img/globo-logo.png',
+		stack: ["Node", "React", "Sass", "Docker"]
+	},
+	{ 
+		title: "Fullstack Senior Developer", 
+		company: "Kenlo",
+		description: "Working as fullstack developer in an online insurance system. My focus was to migrate some old legacies we had, to a modern approach.", 
+		company_url: 'www.kenlo.com',
+		started: 'Apr/2021',
+		ended: 'Mar/2022',
+		logo: './img/kenlo-logo.jpeg',
+		stack: ["Node/Express", "Typescript", "React", "AWS", "GCP", "Docker"]
+	},
+	{ 
+		title: "Fullstack Senior Developer", 
+		company: "Kroton",
+		description: "Was internalized for the company I was a consultant. The job was pretty much the same it was on prior experience at PlusIt", 
+		company_url: 'www.kroton.com',
+		started: 'Sept/2020',
+		ended: 'Apr/2021',
+		logo: './img/kroton-logo.png',
+		stack: ["Node/Express", "React", "AWS (Lambda, S3, EC2, Aurora, SQS/SNS)", "Docker (Swarm, Kubernetes)", "MongoDB", "Microservices Architecture"]
+	},
+	{ 
+		title: "Fullstack Mid Level Developer", 
+		company: "Plus-it Consulting",
+		description: "Worked allocated in Kroton, at this time it was the biggest educational group in the Western. It was a great experience to work in this amazing company.", 
+		company_url: 'www.plus-it.com',
+		started: 'Nov/2017',
+		ended: 'Sept/2020',
+		logo: './img/plusit-logo.png',
+		stack: ["Node/Express", "React", "AWS (Lambda, S3, EC2, Aurora, SQS/SNS)", "Docker (Swarm, Kubernetes)", "MongoDB", "Microservices Architecture"]
+	},
+	{ 
+		title: "Frontend Jr. Developer", 
+		company: "Startcorp",
+		description: "Worked as front-end developer on back-office/e-commerce applications, It was a dynamic software house so I learnt (and worked) a lot in this short period", 
+		company_url: 'www.starcorp.com.br',
+		started: 'Apr/2021',
+		ended: 'Fev/2021',
+		logo: './img/starcorp-logo.jpeg',
+		stack: ["AngularJS", "Angular 4+"]
+	},
+	{ 
+		title: "Frontend Jr. Developer", 
+		company: "Tursites",
+		description: "Worked as a frontend developer for this small local website agency, It was my first experience with frontend.", 
+		company_url: 'www.kenlo.com',
+		started: 'Apr/2021',
+		ended: 'Fev/2022',
+		logo: './img/tursites-logo.png',
+		stack: ["Jquery", "CSS", "Vanilla JS"]
+	},
+	{ 
+		title: "Intern", 
+		company: "ISat",
+		description: "My first experience with programming! It was a great place and a learnt a lot.", 
+		company_url: 'www.kenlo.com',
+		started: 'Apr/2021',
+		ended: 'Fev/2022',
+		logo: './img/isat-logo.png',
+		stack: ["C#", "VBScript", "PHP"]
+	}
+] 
+%}
 <body>
-	<header>
-		<h1>{{ title }}</h1>
-	</header>
 	<main>
-	{{ content | safe }}
+		<section class="main__content">
+			<div class="content__head">
+				<div class="content__name">
+					<h1 class="name">> Gustavo Poletto<h1>
+				</div>
+				<div class="content__description">
+					<p class="description">Hello, I'm Gustavo<p>
+					<p class="description">Fullstack developer based in Valinhos, Brazil. Currently working at the largest news portal in Latin América, <a class="link" href="https://www.globo.com">globo.com</a><p>
+				</div>
+				<div class="content__menu">
+					<ul class="menu">
+						<li class="menu__item"><span id="info" class="menu__item--border-green menu__item--selected">Info/Contact</span></li>
+						<li class="menu__item"><span id="skills" class="menu__item--border-cyan">Skills</span></li>
+						<li class="menu__item"><span id="experience" class="menu__item--border-pink">Experience</span></li>
+						<li class="menu__item"><span id="projects" class="menu__item--border-yellow">Projects</span></li>
+					<ul>
+				</div>
+			 </div>
+			 <div class="content__info">
+				{% include "../_includes/info.njk" %}
+			 </div>
+			 <div class="content__skills hide">
+				{% include "../_includes/skills.njk" %}
+			 </div>
+			 <div class="content__projects hide">
+			 	{% for item in projects %}
+					{{ cards.projects(item.title, item.description, item.image, item.repo_url) }}
+				 {% endfor %}
+			 </div>
+			 <div class="content__experience hide">
+			 	{% for item in experiences %}
+					{{ cards.experience(item.title, item.company, item.description, item.started, item.ended, item.company_website, item.logo, item.stack) }}
+				 {% endfor %}
+			 </div>
+		</section>
 	</main>
 </body>
 </html>
