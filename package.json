@@ -7,7 +7,7 @@
     "watch:sass": "sass  --no-source-map --watch src/sass:public/css",
     "watch:eleventy": "eleventy --serve --formats=njk,jpeg,png,jpg",
     "build:sass": "sass  --no-source-map src/sass:public/css",
-    "build:eleventy": "eleventy",
+    "build:eleventy": "eleventy --formats=njk,jpeg,png,jpg",
     "postbuild": "lightningcss --minify --targets '> 0.25%, not IE 11' public/css/*.css -o public/css/*.css",
     "start": "npm-run-all build:sass --parallel watch:*",
     "build": "npm-run-all build:sass build:eleventy"
