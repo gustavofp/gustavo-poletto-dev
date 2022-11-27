@@ -4,11 +4,11 @@
   "description": "Featuring absolutely nothing beyond a base HTML5 template and the essential setup to watch and compile your Sass alongside 11ty.",
   "main": "index.html",
   "scripts": {
-    "watch:sass": "sass  --no-source-map --watch src/sass:public/css",
+    "watch:sass": "sass  --no-source-map --watch src/sass:public",
     "watch:eleventy": "eleventy --serve --formats=njk,jpeg,png,jpg",
-    "build:sass": "sass  --no-source-map src/sass:public/css",
+    "build:sass": "sass  --no-source-map src/sass:public",
     "build:eleventy": "eleventy --formats=njk,jpeg,png,jpg",
-    "postbuild": "lightningcss --minify --targets '> 0.25%, not IE 11' public/css/*.css -o public/css/*.css",
+    "postbuild": "lightningcss --minify --targets '> 0.25%, not IE 11' public/*.css -o public/*.css",
     "start": "npm-run-all build:sass --parallel watch:*",
     "build": "npm-run-all build:sass build:eleventy"
   },
